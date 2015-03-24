@@ -9,9 +9,10 @@ namespace Orca.Controllers
     public class InputController : Controller
     {
         // GET: Input
-        public ActionResult Index()
+        public ActionResult add()
         {
             return View();
         }
+
     }
 }

@@ -1,11 +1,22 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html {
+    background-color: #e2e2e2;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #efeeef;
+    border-top: solid 10px #3E3E93;
+    color: #333;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 960px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
+    text-align: center;
     padding-right: 15px;
 }
 
@@ -21,4 +32,77 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+header{
+    height: 165px;
+    background: #fff;
+    padding: 20px 20px 10px; 
+    position: relative;
+    border-radius: 0 0 20px 20px;
+}
+    
+footer {
+    clear: both;
+    background-color: #e2e2e2;
+    font-size: .9em;
+    height: 100px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+/* We start with the actual styling of page elements here */
+
+#ssea {
+    height: 120px;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+}
+#aub {
+    height: 120px;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+
+.text-input {
+    border: 1px solid #e2e2e2;
+    background: #fff;
+    color: #333;
+    font-size: 1.2em;
+    margin: 5px auto;
+    padding: 5px;
+    display: block;
+    width: 300px;
+}
+
+.text-label {
+    display: block;
+    margin: 20px auto;
+    font-size: 1.2em;
+}
+
+button.submit {
+    display: block;
+    background-color: #d3dce0;
+    border: 1px solid #787878;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 7px;
+    margin: 0 auto;
+    width: auto;
+}
+.text-validate {
+    display: block;
+    color: red;
+    margin: 0 auto 40px;
+    min-height: 1.2em;
+
+}
+
+.notice {
+    color: #888;
+    margin-bottom: 40px;
 }
