@@ -1,7 +1,26 @@
-﻿
+﻿@model Orca.Models.Addition
 @{
-    ViewBag.Title = "add";
+    ViewBag.Title = "Add Quota";
 }
 
-<h2>add</h2>
+@using (Html.BeginForm("Added", "Input"))
+{
+    <input type="hidden" name="action" value="add" />
+    var input = new { @class = "text-input" };
+    var label = new { @class = "text-label" };
+    var validator = new { @class = "text-validate" };
 
+    @Html.LabelFor(model => model.AUBnet, label);
+    @Html.TextBoxFor(model => model.AUBnet, input);
+    @Html.ValidationMessageFor(model => model.AUBnet, null, validator);
+
+    @Html.LabelFor(model => model.Kilos, label);
+    @Html.TextBoxFor(model => model.Kilos, input);
+    @Html.ValidationMessageFor(model => model.Kilos, null, validator);
+
+    <button type="submit" class="submit">Submit</button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

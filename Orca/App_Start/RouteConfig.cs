@@ -16,7 +16,7 @@ namespace Orca
             routes.MapRoute(
                 name: "Default",
                 url: "{action}/{id}",
-                defaults: new { controller = "Input", action = "add", id = UrlParameter.Optional }
+                defaults: new { controller = "Input", action = "Add", id = UrlParameter.Optional }
             );
         }
     }
