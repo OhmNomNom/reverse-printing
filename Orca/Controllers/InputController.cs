@@ -9,7 +9,11 @@ namespace Orca.Controllers
 {
     public class InputController : Controller
     {
-        // GET: Input
+        protected override void HandleUnknownAction(string actionName)
+        {
+            RedirectToAction("Add").ExecuteResult(this.ControllerContext);
+        }
+
         public ActionResult Add()
         {
             return View();

@@ -1,0 +1,28 @@
+﻿@model Orca.Models.AdditionIterable
+@{
+    ViewBag.Title = "View statistics";
+}
+@Html.ActionLink("Download data", "Download", "Data", new { act = "data", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
+@Html.ActionLink("Download quota data", "Download", "Data", new { act = "quota", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
+
+<table>
+    <thead>
+        <tr>
+            <td>AUBnet</td>
+            <td>Kilos Donated</td>
+            <td>Quota to be added</td>
+            <td>Timestamp</td>
+        </tr>
+    </thead>
+    @{Orca.Models.Addition record = Model.getNext();}
+    @while (record != null)
+    {
+        <tr>
+            <td>@record.AUBnet</td>
+            <td>@record.Kilos</td>
+            <td>@record.Quota</td>
+            <td>@record.Timestamp</td>
+        </tr>
+        record = Model.getNext();
+    }
+</table>

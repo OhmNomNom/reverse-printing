@@ -1,0 +1,30 @@
+﻿@model Orca.Models.DateInfo
+@{
+    ViewBag.Title = "View statistics";
+}
+
+@section Styles {
+    @Styles.Render("~/bundles/jquery-ui")
+}
+ 
+@using (Html.BeginForm("Data","Data"))
+{
+    var label = new { @class = "text-label" };
+    var validator = new { @class = "text-validate" };
+    
+    @Html.LabelFor(model => model.StartDate, label);
+    @Html.TextBoxFor(model => model.StartDate, new { @class = "datepicker text-input", @Value = Model.StartDate.ToString("dd/MM/yyyy") })
+    @Html.ValidationMessageFor(model => model.StartDate, null, validator);
+    
+    @Html.LabelFor(model => model.EndDate, label);
+    @Html.TextBoxFor(model => model.EndDate, new { @class = "datepicker text-input", @Value = Model.EndDate.ToString("dd/MM/yyyy") })
+    @Html.ValidationMessageFor(model => model.EndDate, null, validator);
+
+    <button type="submit" class="submit">Submit</button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/datepicker")
+    <script>$(function () { $('.datepicker').datepicker({ dateFormat: 'dd/mm/yy' })})</script>
+}

@@ -112,11 +112,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\InputController.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Functionality\DB.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Addition.cs" />
+    <Compile Include="Models\AdditionIterable.cs" />
+    <Compile Include="Models\DateInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +161,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Input\Add.cshtml" />
     <Content Include="Views\Input\Added.cshtml" />
+    <Content Include="Views\Stats\Stats.cshtml" />
+    <Content Include="Views\Stats\Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
