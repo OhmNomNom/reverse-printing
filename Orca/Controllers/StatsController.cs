@@ -18,10 +18,9 @@ namespace Orca.Controllers
         public ActionResult Filter()
         {            
             DateTime Now = DateTime.Now;
-            TimeSpan DaysInPrevMonth = TimeSpan.FromDays(DateTime.DaysInMonth(Now.Year,(Now.Month+11)%12));
-            //+11)%12 to get the previous month
+            TimeSpan DaysInMonth = TimeSpan.FromDays(30);
 
-            DateInfo Bounds = new DateInfo(Now.Subtract(DaysInPrevMonth), Now);
+            DateInfo Bounds = new DateInfo(Now.Subtract(DaysInMonth), Now);
 
             return View(Bounds);
         }
@@ -39,8 +38,7 @@ namespace Orca.Controllers
             if (Request["act"] == "quota") quotaOnly = true;
             else if (Request["act"] != "data")
             {
-                //Response.Write(Request["action"]);
-                Response.Redirect("/Stats/");
+                RedirectToAction("Filter").ExecuteResult(this.ControllerContext);
                 return Content("");
             }
 
@@ -59,7 +57,7 @@ namespace Orca.Controllers
             Addition rec;
 
             if (quotaOnly) resp += "AUBnet,Quota\n";
-            else resp += "AUBnet,Kilos,Quota,Timestamp";
+            else resp += "AUBnet,Kilos,Quota,Timestamp\n";
 
             while ((rec = recs.getNext()) != null)
             {

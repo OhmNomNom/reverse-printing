@@ -19,6 +19,7 @@ namespace Orca.Models
             StartDate = start;
             EndDate = end;
         }
+
         public static AdditionIterable fromBounds(DateInfo Bounds)
         {
             return new AdditionIterable(Bounds.StartDate, Bounds.EndDate);
@@ -33,6 +34,7 @@ namespace Orca.Models
             //Console.Write(reader.GetFieldType(1));
             ret.Kilos = (double)reader.GetDecimal(1);
             ret.Timestamp = reader.GetDateTime(2);
+            ret.setFactor(AUB.getFactor(ret.AUBnet));
 
             return ret;
         }

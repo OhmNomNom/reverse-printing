@@ -2,10 +2,10 @@
 @{
     ViewBag.Title = "View statistics";
 }
-@Html.ActionLink("Download data", "Download", "Data", new { act = "data", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
-@Html.ActionLink("Download quota data", "Download", "Data", new { act = "quota", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
+@Html.ActionLink("Download data", "Download", "Stats", new { act = "data", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
+@Html.ActionLink("Download quota data", "Download", "Stats", new { act = "quota", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
 
-<table>
+<table id="Stats">
     <thead>
         <tr>
             <td>AUBnet</td>

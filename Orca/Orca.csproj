@@ -113,6 +113,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\InputController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
+    <Compile Include="Functionality\AUB.cs" />
     <Compile Include="Functionality\DB.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -125,11 +126,27 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\aub.png" />
+    <Content Include="Images\jquery-ui\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Images\jquery-ui\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Images\jquery-ui\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Images\jquery-ui\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Images\jquery-ui\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Images\jquery-ui\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Images\jquery-ui\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Images\jquery-ui\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Images\jquery-ui\ui-icons_222222_256x240.png" />
+    <Content Include="Images\jquery-ui\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Images\jquery-ui\ui-icons_454545_256x240.png" />
+    <Content Include="Images\jquery-ui\ui-icons_888888_256x240.png" />
+    <Content Include="Images\jquery-ui\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Images\ssea.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -137,6 +154,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

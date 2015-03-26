@@ -12,15 +12,17 @@ namespace Orca
     {
         SqlConnection conn;
 
-        public void addDonation(Addition val)
+        public void addDonation(Addition val, string actor)
         {
             SqlCommand command = conn.CreateCommand();
-            command.CommandText = "INSERT INTO Donation(AUBnet,Kilos) VALUES(@aubnet,@kilos)";
+            command.CommandText = "INSERT INTO Donation(AUBnet,Kilos,Actor) VALUES(@aubnet,@kilos,@actor)";
 
             command.Parameters.Add("@aubnet", System.Data.SqlDbType.Char, val.AUBnet.Length).Value = val.AUBnet;
 
             SqlParameter kilos = new SqlParameter("@kilos", System.Data.SqlDbType.Decimal, 18);
             kilos.Precision = 3;
+
+            command.Parameters.Add("@actor", System.Data.SqlDbType.Char, actor.Length).Value = actor;
 
             command.Parameters.Add(kilos).Value = val.Kilos;
 

@@ -26,7 +26,7 @@ namespace Orca.Controllers
 
             DB db = new DB();
 
-            db.addDonation(val);
+            db.addDonation(val, AUB.getUser());
 
             return View(val);
         }
