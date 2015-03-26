@@ -27,6 +27,7 @@ namespace Orca.Controllers
 
         public ActionResult Stats(DateInfo bounds)
         {
+            ///TODO: if no dates, redirect
             AdditionIterable Records = AdditionIterable.fromBounds(bounds);
 
             return View(Records);
@@ -57,12 +58,12 @@ namespace Orca.Controllers
             Addition rec;
 
             if (quotaOnly) resp += "AUBnet,Quota\n";
-            else resp += "AUBnet,Kilos,Quota,Timestamp\n";
+            else resp += "AUBnet,Major,Kilos,Quota,Timestamp\n";
 
             while ((rec = recs.getNext()) != null)
             {
                 if(quotaOnly) resp += String.Format("{0},{1}\n", rec.AUBnet, rec.Quota);
-                else resp += String.Format("{0},{1},{2},{3}\n", rec.AUBnet, rec.Kilos, rec.Quota, rec.Timestamp);
+                else resp += String.Format("{0},{1},{2},{3},{4}\n", rec.AUBnet, rec.Major, rec.Kilos, rec.Quota, rec.Timestamp);
             }
 
             return Content(resp,"text/csv");

@@ -2,13 +2,14 @@
 @{
     ViewBag.Title = "View statistics";
 }
-@Html.ActionLink("Download data", "Download", "Stats", new { act = "data", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
-@Html.ActionLink("Download quota data", "Download", "Stats", new { act = "quota", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
+@Html.ActionLink("Download full data", "Download", "Stats", new { act = "data", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
+<!-- Html.ActionLink("Download quota data", "Download", "Stats", new { act = "quota", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null) -->
 
 <table id="Stats">
     <thead>
         <tr>
             <td>AUBnet</td>
+            <td>Major</td>
             <td>Kilos Donated</td>
             <td>Quota to be added</td>
             <td>Timestamp</td>
@@ -19,6 +20,7 @@
     {
         <tr>
             <td>@record.AUBnet</td>
+            <td>@record.Major</td>
             <td>@record.Kilos</td>
             <td>@record.Quota</td>
             <td>@record.Timestamp</td>

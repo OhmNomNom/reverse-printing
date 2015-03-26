@@ -34,7 +34,6 @@ namespace Orca.Models
             //Console.Write(reader.GetFieldType(1));
             ret.Kilos = (double)reader.GetDecimal(1);
             ret.Timestamp = reader.GetDateTime(2);
-            ret.setFactor(AUB.getFactor(ret.AUBnet));
 
             return ret;
         }

@@ -9,10 +9,23 @@ namespace Orca.Models
 {
     public class Addition
     {
-        private double _factor = 1;
-
         [Required, MaxLength(8), DisplayName("AUBnet Account")]
-        public string AUBnet{get; set;}
+        public string AUBnet
+        {
+            get
+            {
+                return _aubnet;
+            }
+            set 
+            {
+                this._aubnet = value;
+                this._major = AUB.getMajor(value);
+                this._factor = AUB.getFactorForMajor(this.Major);
+            } 
+        }
+
+        private string _major = "", _aubnet = "";
+        private double _factor = 1;
 
         [Required, Range(0.01,100), DisplayName("Kilograms Donated")]
         public double Kilos{get; set;}
@@ -21,10 +34,7 @@ namespace Orca.Models
 
         public double Quota { get { return Kilos * _factor; } }
 
-        public void setFactor(double factor)
-        {
-            _factor = factor;
-        }
+        public string Major { get { return _major; } }
         
     }
 }
