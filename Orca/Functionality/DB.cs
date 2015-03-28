@@ -33,7 +33,7 @@ namespace Orca
         public SqlDataReader getDonations(DateTime StartDate, DateTime EndDate)
         {
             SqlCommand command = conn.CreateCommand();
-            command.CommandText = "SELECT AUBnet, Kilos, Timestamp FROM Donation WHERE Timestamp BETWEEN @start and @end";
+            command.CommandText = "SELECT AUBnet, Kilos, Timestamp, Processed FROM Donation WHERE Timestamp BETWEEN @start and @end";
 
 
             command.Parameters.Add("@start", System.Data.SqlDbType.Date, 8).Value = StartDate.Subtract(TimeSpan.FromSeconds(1));
@@ -43,6 +43,25 @@ namespace Orca
 
             command.Prepare();
             return command.ExecuteReader();
+        }
+
+        public double getFactorForMajor(string Major)
+        {
+            SqlCommand command = conn.CreateCommand();
+            command.CommandText = "SELECT Factor FROM Reward WHERE Major = @major";
+
+
+            command.Parameters.Add("@major", System.Data.SqlDbType.NChar, 16).Value = Major;
+
+            command.Prepare();
+            SqlDataReader reader = command.ExecuteReader();
+
+            if(!reader.Read()) throw new NotImplementedException();
+            double multiplier = (double)reader.GetDecimal(0);
+
+            reader.Close();
+
+            return multiplier;
         }
 
         public DB()

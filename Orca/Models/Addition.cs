@@ -32,6 +32,8 @@ namespace Orca.Models
 
         public DateTime Timestamp { get; set; }
 
+        public bool Processed { get; set; }
+
         public double Quota { get { return Kilos * _factor; } }
 
         public string Major { get { return _major; } }

@@ -13,6 +13,7 @@
             <td>Kilos Donated</td>
             <td>Quota to be added</td>
             <td>Timestamp</td>
+            <td>Processed</td>
         </tr>
     </thead>
     @{Orca.Models.Addition record = Model.getNext();}
@@ -24,6 +25,7 @@
             <td>@record.Kilos</td>
             <td>@record.Quota</td>
             <td>@record.Timestamp</td>
+            <td><input type="checkbox" disabled @(record.Processed? " checked" : "") /></td>
         </tr>
         record = Model.getNext();
     }

@@ -27,7 +27,11 @@ namespace Orca.Controllers
 
         public ActionResult Stats(DateInfo bounds)
         {
-            ///TODO: if no dates, redirect
+            if (Request["StartDate"] == null || Request["EndDate"] == null) { 
+                RedirectToAction("Filter").ExecuteResult(this.ControllerContext);
+                return Content("");
+            }
+
             AdditionIterable Records = AdditionIterable.fromBounds(bounds);
 
             return View(Records);
