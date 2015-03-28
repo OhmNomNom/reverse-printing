@@ -8,8 +8,9 @@ namespace Orca
     public class AUB
     {
 
-        public static string getUser()
+        public static string getCurrentUser()
         {
+            //Get the user logged in in our system
             return "sma90"; ///TODO: Implement logging according to logged in user
         }
 

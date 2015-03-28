@@ -12,7 +12,7 @@ namespace Orca.Controllers
     {
         protected override void HandleUnknownAction(string actionName)
         {
-            RedirectToAction("Filter").ExecuteResult(this.ControllerContext);
+            RedirectToAction("Filter").ExecuteResult(this.ControllerContext); //Invalid actions get redirected
         }
         
         public ActionResult Filter()
@@ -20,7 +20,7 @@ namespace Orca.Controllers
             DateTime Now = DateTime.Now;
             TimeSpan DaysInMonth = TimeSpan.FromDays(30);
 
-            DateInfo Bounds = new DateInfo(Now.Subtract(DaysInMonth), Now);
+            DateInfo Bounds = new DateInfo(Now.Subtract(DaysInMonth), Now); //Default values to populate textboxes
 
             return View(Bounds);
         }
@@ -29,46 +29,44 @@ namespace Orca.Controllers
         {
             if (Request["StartDate"] == null || Request["EndDate"] == null) { 
                 RedirectToAction("Filter").ExecuteResult(this.ControllerContext);
-                return Content("");
+                return Content(""); //The redirect is asynchronous
+                                    //Need to exit the function and not call the view
             }
 
-            AdditionIterable Records = AdditionIterable.fromBounds(bounds);
+            AdditionIterable Records = AdditionIterable.fromBounds(bounds); //Don't worry, we'll dispose of it in the cshtml
 
             return View(Records);
         }
 
         public ActionResult Download()
         {
-            bool quotaOnly = false;
-            if (Request["act"] == "quota") quotaOnly = true;
-            else if (Request["act"] != "data")
+            if (Request["act"] != "data") //Invalid request
             {
-                RedirectToAction("Filter").ExecuteResult(this.ControllerContext);
+                RedirectToAction("Filter").ExecuteResult(this.ControllerContext); 
                 return Content("");
             }
 
-            Response.Clear();
+            Response.Clear(); //Start with a raw file
 
             DateTime start = DateTime.ParseExact(Request["StartDate"], "dd-MM-yy",CultureInfo.InvariantCulture);
             DateTime end = DateTime.ParseExact(Request["EndDate"], "dd-MM-yy", CultureInfo.InvariantCulture);
 
 
             Response.AddHeader("Content-Disposition", "attachment; filename=" + 
-                "ReversePrinting_" + (quotaOnly?"quota":"data") + "_" + start.ToString("dMMMyy") + "-" + end.ToString("dMMMyy") +".csv");
+                "ReversePrinting_data_" + start.ToString("dMMMyy") + "-" + end.ToString("dMMMyy") +".csv"); //We're going to send a csv file
             
             AdditionIterable recs = AdditionIterable.fromBounds(new DateInfo(start, end));
 
-            string resp = "";
             Addition rec;
 
-            if (quotaOnly) resp += "AUBnet,Quota\n";
-            else resp += "AUBnet,Major,Kilos,Quota,Timestamp\n";
+            string resp = "AUBnet,Major,Kilos,Quota,Timestamp,Processed\n"; //Header for the files
 
             while ((rec = recs.getNext()) != null)
             {
-                if(quotaOnly) resp += String.Format("{0},{1}\n", rec.AUBnet, rec.Quota);
-                else resp += String.Format("{0},{1},{2},{3},{4}\n", rec.AUBnet, rec.Major, rec.Kilos, rec.Quota, rec.Timestamp);
+                resp += String.Format("{0},{1},{2},{3},{4},{5}\n", rec.AUBnet, rec.Major, rec.Kilos, rec.Quota, rec.Timestamp, rec.Processed?1:0);
             }
+
+            recs.Dispose();
 
             return Content(resp,"text/csv");
         }

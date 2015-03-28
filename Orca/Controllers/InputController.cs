@@ -11,7 +11,7 @@ namespace Orca.Controllers
     {
         protected override void HandleUnknownAction(string actionName)
         {
-            RedirectToAction("Add").ExecuteResult(this.ControllerContext);
+            RedirectToAction("Add").ExecuteResult(this.ControllerContext); //Redirect invalid actions
         }
 
         public ActionResult Add()
@@ -19,16 +19,17 @@ namespace Orca.Controllers
             return View();
         }
 
-        public ActionResult Added(Addition val)
+        public ActionResult Added(Addition value)
         {
-            if (Request.Form["action"] != "add") Response.Redirect("Add");
-            if (!ModelState.IsValid) Response.Redirect("Add");
+            if (Request.Form["action"] != "add" || !ModelState.IsValid) Response.Redirect("Add"); //Invalid request redirection
 
             DB db = new DB();
 
-            db.addDonation(val, AUB.getUser());
+            db.addDonation(value, AUB.getCurrentUser());
 
-            return View(val);
+            db.Dispose();
+
+            return View(value);
         }
 
     }

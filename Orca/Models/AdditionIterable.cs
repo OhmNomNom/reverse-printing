@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace Orca.Models
 {
-    public class AdditionIterable
+    public class AdditionIterable : IDisposable
     {
         private DB conn;
         private SqlDataReader reader;
@@ -30,11 +30,13 @@ namespace Orca.Models
             if (!reader.Read()) return null;
             Addition ret = new Addition();
 
+            //Using indices of columns
+            //SQL: SELECT AUBnet,Kilos,Timestamp,Processed FROM Donation... (DB.cs)
+
             ret.AUBnet = reader.GetString(0);
-            //Console.Write(reader.GetFieldType(1));
             ret.Kilos = (double)reader.GetDecimal(1);
             ret.Timestamp = reader.GetDateTime(2);
-            ret.Processed = reader.GetBoolean(3);
+            ret.Processed = reader.GetBoolean(3); 
 
             return ret;
         }
@@ -46,6 +48,11 @@ namespace Orca.Models
                 StartDate = StartDate,
                 EndDate = EndDate
             });
+        }
+
+        public void Dispose()
+        {
+            conn.Dispose();
         }
     }
 }

@@ -3,7 +3,6 @@
     ViewBag.Title = "View statistics";
 }
 @Html.ActionLink("Download full data", "Download", "Stats", new { act = "data", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null)
-<!-- Html.ActionLink("Download quota data", "Download", "Stats", new { act = "quota", StartDate = Model.StartDate.ToString("dd-MM-yy"), EndDate = Model.EndDate.ToString("dd-MM-yy") }, null) -->
 
 <table id="Stats">
     <thead>
@@ -30,3 +29,7 @@
         record = Model.getNext();
     }
 </table>
+
+@{
+    Model.Dispose(); //We're done with it. Ugly, I know...
+}

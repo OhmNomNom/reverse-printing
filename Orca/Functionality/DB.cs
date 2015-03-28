@@ -8,7 +8,7 @@ using Orca.Models;
 
 namespace Orca
 {
-    public class DB
+    public class DB : IDisposable
     {
         SqlConnection conn;
 
@@ -33,7 +33,7 @@ namespace Orca
         public SqlDataReader getDonations(DateTime StartDate, DateTime EndDate)
         {
             SqlCommand command = conn.CreateCommand();
-            command.CommandText = "SELECT AUBnet, Kilos, Timestamp, Processed FROM Donation WHERE Timestamp BETWEEN @start and @end";
+            command.CommandText = "SELECT AUBnet,Kilos,Timestamp,Processed FROM Donation WHERE Timestamp BETWEEN @start and @end";
 
 
             command.Parameters.Add("@start", System.Data.SqlDbType.Date, 8).Value = StartDate.Subtract(TimeSpan.FromSeconds(1));
@@ -56,7 +56,7 @@ namespace Orca
             command.Prepare();
             SqlDataReader reader = command.ExecuteReader();
 
-            if(!reader.Read()) throw new NotImplementedException();
+            if (!reader.Read()) throw new NotImplementedException();
             double multiplier = (double)reader.GetDecimal(0);
 
             reader.Close();
@@ -70,12 +70,10 @@ namespace Orca
             conn.Open();
         }
 
-        ~DB()
+        public void Dispose()
         {
-            //conn.Close();
-            //conn.Dispose();
+            conn.Close();
+            conn.Dispose();
         }
-
-
     }
 }
